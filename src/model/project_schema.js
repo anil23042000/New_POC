@@ -1,25 +1,20 @@
 const mongoose = require('mongoose');
 
 var projectSchema = new mongoose.Schema({
-    projectInfo: {
+    projectName: {
         type: String,
         required: true
     },
-    filePath: {
+    clientName: {
         type: String,
         required: true
     },
-    fileName: {
-        type: String,
+    projectStartDate: {
+        type: Date,
         required: true
     },
-    userName: {
-        type: String,
-        required: true
-    },
-    dateAndTime: {
-        type: String,
-        default: Date.now()
+    projectEndDate: {
+        type: Date
     }
 });
 
