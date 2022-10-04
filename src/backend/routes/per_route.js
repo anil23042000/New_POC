@@ -4,7 +4,7 @@ const exphbs = require('express-handlebars');
 const bodyparser = require('body-parser');
 const router = express.Router();
 const controller = require("../controller/per_controller")
-const projectdetails = require('../model/projects_details_schema');
+const projectdetails = require('../model/project_resource_schema');
 
 var mammoth = require("mammoth");
 var multer = require('multer');
@@ -13,21 +13,21 @@ const path = require('path');
 const xlsxFile = require('read-excel-file/node');
 const { table } = require("console");
 
-// //creating storage
-// const storageEngin = multer.diskStorage({
-//     //giving destination for strong file
-//     destination: function (request, file, callback) {
-//         console.log("hi")
-//         callback(null, "./uploads/")
-//     },
+//creating storage
+const storageEngin = multer.diskStorage({
+    //giving destination for strong file
+    destination: function (request, file, callback) {
+        console.log("hi")
+        callback(null, "./uploads/")
+    },
 
-//     //giving filename
-//     filename: function (request, file, callback) {
-//         callback(null, file.originalname)
-//     }
-// });
+    //giving filename
+    filename: function (request, file, callback) {
+        callback(null, file.originalname)
+    }
+});
 
-// const upload = multer({ storage: storageEngin })
+const upload = multer({ storage: storageEngin })
 
 
 
@@ -42,6 +42,8 @@ router.get("/project", (req, res) => {
     res.render("uploadfile/addproject")
     //res.render("uploadfile/addproject");
 });
+//rendering for uploading new file
+router.get("/addbill",controller.file)
 //rendering for inserting for resource
 router.get("/resource", controller.projectsreso);
 
@@ -50,11 +52,13 @@ router.post("/postemployee", controller.uploadEmployee);
 router.post("/postproject", controller.uploadProject);
 router.post("/postresource", controller.uploadResource);
 
+router.post("/postbill", upload.single("fileName"), controller.uploadBill);
+
 //list all data from each table from database
 router.get("/listproject", controller.listProjects)
 router.get("/listemployee", controller.listEmployee)
 router.get("/listresource", controller.listResource);
-
+router.get("/listfile", controller.listFile);
 
 //finding single data for updating 
 router.get("/getproject/:id", controller.getProject)
@@ -70,5 +74,23 @@ router.post("/updateresource", controller.updateResource);
 router.get("/deletepro/:id", controller.deleteoneProject);
 router.get("/deleteemp/:id", controller.deleteoneEmployee);
 router.get("/deletereso/:id", controller.deleteoneResource);
+
+
+//routing get method for reading one file 
+router.get("/fileread/:id", controller.readData);
+
+//giving more details
+router.get("/details/:id", controller.moreDetails);
+
+
+//routing get method for deleting single fileinfo
+router.get("/filedelete/:id", controller.deletesingle);
+
+//routing get method for getting one file for updateing
+router.get("/fileupdate/:id", controller.updateFile);
+
+
+//routing post method for updating fileinfo and storing new file to folder 
+router.post("/updatefile", upload.single("fileName"), controller.updateOneFile);
 
 module.exports = router;

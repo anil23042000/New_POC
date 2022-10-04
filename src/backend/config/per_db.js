@@ -8,3 +8,5 @@ mongoose.connect('mongodb://localhost:27017/EmployeeInfo', { useNewUrlParser: tr
 require('../model/project_schema');
 
 require('../model/employee_schema'); 
+
+require('../model/file_schema');

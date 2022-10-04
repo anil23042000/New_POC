@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ <link href='https://fonts.googleapis.com/css?family=Oswald:300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    body {
+      background-color: rgb(165, 247, 240);
+
+    }
+
+    .dropbtn {
+      background-color: #04AA6D;
+      color: white;
+      padding: 16px;
+      font-size: 16px;
+      border: none;
+    }
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    * {
+      -webkit-transition-property: all;
+      -webkit-transition-duration: .2s;
+      -moz-transition-timing-function: cubic-bezier(100, 50, 21, 6);
+      -moz-transition-property: all;
+      -moz-transition-timing-function: cubic-bezier(100, 50, 21, 6);
+    }
+
+    .btn {
+      color: rgb(248, 239, 239);
+
+      padding: 10px 20px;
+      text-decoration: none;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .btn:hover {
+      border: none;
+      background: rgba(138, 247, 239, 0.623);
+      background: #8ef3df;
+      padding: 20px 20px;
+      color: #1b1b1b;
+    }
+  </style>
+
+
+  <script>
+    function myFunction() {
+      var tableStr, tr, td;
+      var table = document.getElementById("mytable");
+      var input = document.getElementById("myInput");
+      var filter = input.value.toUpperCase();
+      tr = table.getElementsByTagName("tr");
+      for (var i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+  </script>
+
+</head>
+
+<body>
+ <nav class="navbar-expand-lg navbar-dark bg-dark" id="mynav">
+    <h2 style="color: white;">Accionlabs</h2>
+    <a href="/api"><button class="btn btn-primary ">Home</button></a>
+    <div class="dropdown">
+       <a id="av" href="/api/listproject"><button class="btn dropbtn">Projects</button></a>
+    </div>
+    <div class="dropdown">
+      <a id="av" href="/api/listemployee"><button class="btn dropbtn">Employees</button></a>
+    </div>
+    <div class="dropdown">
+     <a id="av" href="/api/listresource"><button class="btn dropbtn">Project Resource</button></a>
+    </div>
+     <div class="dropdown">
+      <a id="av" href="/api/listfile"><button class="btn dropbtn">Monthly Bill</button></a>
+    </div>
+  </nav>
+
+
+<section class="h-100 h-custom" style="background-color: #8fc4b7;">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-lg-8 col-xl-6">
+          <div class="card rounded-3">
+            <div class="card-body p-4 p-md-5">
+              <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">ADD Monthly-Bill</h3>
+              <form class="px-md-2" action="/api/postbill" method="POST" autocomplete="off" enctype="multipart/form-data">
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="form3Example1q">select Employee ID</label>
+                  <select class="form-select mt-3" name="ename" id="ename">
+                    {{#each employee}}
+                    <option name="ename" id="ename">{{this._id}}</option>
+                    {{/each}}
+                  </select>
+                </div>
+                <div class="row mb-4 pb-2 pb-md-0 mb-md-5">
+                  <div class="col-md-6">
+                    <div class="form-outline">
+                      <label class="form-label" for="form3Example1w">Please Upload Monthly Bill</label>
+                      <input type="file" name="fileName" id="form3Example1w fileName" class="form-control" required="" />
+                    </div>
+                  </div>
+                </div><br>
+                <button type="submit" class="btn btn-success btn-lg mb-1">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
+
+
+
+

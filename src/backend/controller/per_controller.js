@@ -9,7 +9,7 @@ var multer = require('multer');
 const xlsxFile = require('read-excel-file/node');
 const projectSchema = require('../model/project_schema');
 const mongoose = require('mongoose');
-const Project = mongoose.model('Projects');
+const Project = mongoose.model('Project');
 const service = require('../service/per_service')
 
 //file  controller 
@@ -37,6 +37,12 @@ async function uploadResource(req, res, next) {
     service.insertResource(req, res);
 }
 
+//posting file 
+async function uploadBill(req, res, next) {
+    service.insertFile(req, res);
+}
+
+
 
 //listing out all project
 async function listProjects(req, res, next) {
@@ -53,6 +59,11 @@ async function listResource(req, res, next) {
     service.listallResource(req, res);
 }
 
+
+//listing file
+async function listFile(req, res, next) {
+    service.listallFile(req, res);
+}
 
 //deleting one Project
 async function deleteoneProject(req, res, next) {
@@ -110,8 +121,40 @@ async function projectsreso(req, res, next) {
 }
 
 
+async function file(req,res,next){
+    service.addfile(req,res);
+}
+
+//reading one file
+async function readData(req, res, next) {
+    service.readOneFile(req, res);
+}
+
+//more
+async function moreDetails(req,res,next){
+    service.giveMoreInfo(req, res);
+}
+
+
+
+
+//calling service file for deleting single project
+async function deletesingle(req, res, next) {
+    service.deleteByid(req, res);
+}
+
+//calling service file for getting single file info
+async function updateFile(req, res, next) {
+    service.getOneFile(req, res);
+}
+
+//calling service file for updating
+async function updateOneFile(req, res, next) {
+    service.replaceFile(req, res);
+}
+
 module.exports = {
-    getResource, updateProject,
+    getResource, updateProject,uploadBill,listFile,file,readData,moreDetails,deletesingle,updateFile,updateOneFile,
     deleteoneResource,
     getData,
     getProject,

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href='https://fonts.googleapis.com/css?family=Oswald:300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        body {
+            background-color: rgb(165, 247, 240);
+
+        }
+
+        .dropbtn {
+            background-color: #04AA6D;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        * {
+            -webkit-transition-property: all;
+            -webkit-transition-duration: .2s;
+            -moz-transition-timing-function: cubic-bezier(100, 50, 21, 6);
+            -moz-transition-property: all;
+            -moz-transition-timing-function: cubic-bezier(100, 50, 21, 6);
+        }
+
+        .btn {
+            color: rgb(248, 239, 239);
+
+            padding: 10px 20px;
+            text-decoration: none;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            border: none;
+            background: rgba(138, 247, 239, 0.623);
+            background: #8ef3df;
+            padding: 20px 20px;
+            color: #1b1b1b;
+        }
+    </style>
+
+
+    <script>
+        function myFunction() {
+            var tableStr, tr, td;
+            var table = document.getElementById("mytable");
+            var input = document.getElementById("myInput");
+            var filter = input.value.toUpperCase();
+            tr = table.getElementsByTagName("tr");
+            for (var i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+
+</head>
+
+<body>
+    <nav class="navbar-expand-lg navbar-dark bg-dark" id="mynav">
+        <h2 style="color: white;">Accionlabs</h2>
+        <a href="/api"><button class="btn btn-primary ">Home</button></a>
+        <div class="dropdown">
+            <a id="av" href="/api/listproject"><button class="btn dropbtn">Projects</button></a>
+        </div>
+        <div class="dropdown">
+            <a id="av" href="/api/listemployee"><button class="btn dropbtn">Employees</button></a>
+        </div>
+        <div class="dropdown">
+            <a id="av" href="/api/listresource"><button class="btn dropbtn">Project Resource</button></a>
+        </div>
+        <div class="dropdown">
+            <a id="av" href="/api/listfile"><button class="btn dropbtn">Monthly Bill</button></a>
+        </div>
+    </nav>
+
+
+    <a style="margin-top: 4px;margin-left:8%" class="btn btn-success" href="/api/addbill"><i class="fa fa-plus"></i>Add New File</a>
+    <input style="margin-left:58%" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Employee.."
+        title="Type in a name">
+
+    <section class="intro" style="margin-top: 8px width:fit-content;;">
+        <div class="gradient-custom-1 h-100">
+            <div class="mask d-flex align-items-center h-100">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-12">
+                            <div class="table-responsive bg-white">
+                                <table class="table mb-0" id="mytable">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>File path</th>
+                                            <th>File Name</th>
+                                            <th type="date">date&time</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#each list}}
+                                        <tr>
+                                            <td>{{this.filePath}}</td>
+                                            <td>{{this.fileName}}</td>
+                                            <td>{{this.dateAndTime}}</td>
+                                            <td>
+                                                <a href="/api/fileread/{{this._id}}"><i class='fa fa-book'
+                                                        style='font-size:24px' aria-hidden="true"></i></a>
+                                                <a href="/api/filedelete/{{this._id}}"
+                                                    onclick="return confirm('Are you sure to delete this project ?');"><i
+                                                        class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+                                                <a href="/api/fileupdate/{{this._id}}"
+                                                    onclick="return confirm('Are you sure to update this project ?');"><i
+                                                        class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+
+                                            </td>
+                                        </tr>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>
