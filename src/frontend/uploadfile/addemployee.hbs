@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
- <link href='https://fonts.googleapis.com/css?family=Oswald:300' rel='stylesheet' type='text/css'>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href='https://fonts.googleapis.com/css?family=Oswald:300' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -24,6 +25,7 @@
       font-size: 16px;
       border: none;
     }
+
     .dropdown {
       position: relative;
       display: inline-block;
@@ -80,49 +82,93 @@
 </head>
 
 <body>
- <nav class="navbar-expand-lg navbar-dark bg-dark" id="mynav">
+  <nav class="navbar-expand-lg navbar-dark bg-dark" id="mynav">
     <h2 style="color: white;">Accionlabs</h2>
     <a href="/api"><button class="btn btn-primary ">Home</button></a>
     <div class="dropdown">
-       <a id="av" href="/api/listproject"><button class="btn dropbtn">Projects</button></a>
+      <a id="av" href="/api/listproject"><button class="btn dropbtn">Projects</button></a>
     </div>
     <div class="dropdown">
       <a id="av" href="/api/listemployee"><button class="btn dropbtn">Employees</button></a>
     </div>
     <div class="dropdown">
-     <a id="av" href="/api/listresource"><button class="btn dropbtn">Project Resource</button></a>
+      <a id="av" href="/api/listresource"><button class="btn dropbtn">Project Resource</button></a>
     </div>
-     <div class="dropdown">
+    <div class="dropdown">
       <a id="av" href="/api/listfile"><button class="btn dropbtn">Monthly Bill</button></a>
     </div>
   </nav>
 
-
-<section class="h-100 h-custom" style="background-color: #8fc4b7;">
+  <section class="h-100 h-custom" style="background-color: #8fc4b7;">
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-lg-8 col-xl-6">
           <div class="card rounded-3">
             <div class="card-body p-4 p-md-5">
-              <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">ADD Employee</h3>
-              <form class="px-md-2" action="/api/postemployee" method="POST" autocomplete="off">
-                <div class="row mb-4 pb-2 pb-md-0 mb-md-5">
-                  <div class="col-md-6">
-                    <div class="form-outline">
-                      <label class="form-label" for="form3Example1w">enter Employee Name</label>
-                      <input type="text" name="name" id="form3Example1w" class="form-control" required="" />
-                    </div>
+              <form class="px-md-2">
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="inputEmail4">First Name</label>
+                    <input type="text" class="form-control" id="inputEmail4" placeholder="first name">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputEmail4">Last Name</label>
+                    <input type="text" class="form-control" id="inputEmail4" placeholder="Last Name">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputEmail4">Email</label>
+                    <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputEmail4">employee_id</label>
+                    <input type="text" class="form-control" id="employee_id" name="employee_id"
+                      placeholder="employee_id">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputEmail4">employee_role</label>
+                    <input type="text" class="form-control" id="employee_role" name="employee_role"
+                      placeholder="employee_role">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputEmail4">employee_phone</label>
+                    <input type="email" class="form-control" id="employee_phone" name="employee_phone"
+                      placeholder="employee_phone">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputAddress">employee_dob</label>
+                    <input type="date" class="form-control" id="employee_dob" name="employee_dob"
+                      placeholder="dd/mm/yyyy">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputAddress">current_org_experience</label>
+                    <input type="text" class="form-control" id="current_org_experience" name="current_org_experience">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputAddress">previous_org_experience</label>
+                    <input type="text" class="form-control" id="previous_org_experience" name="previous_org_experience">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputAddress">current_ctc</label>
+                    <input type="text" class="form-control" id="current_ctc" name="current_ctc">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputAddress">primary_skills</label>
+                    <input type="text" class="form-control" id="primary_skills" name="primary_skills">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputAddress">secondary_skills</label>
+                    <input type="text" class="form-control" id="secondary_skills" name="secondary_skills">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputAddress">status</label>
+                    <input type="text" class="form-control" id="status" name="status">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputAddress">reporting_manager</label>
+                    <input type="text" class="form-control" id="reporting_manager" name="reporting_manager">
                   </div>
                 </div>
-                <div class="row mb-4 pb-2 pb-md-0 mb-md-5">
-                  <div class="col-md-6">
-                    <div class="form-outline">
-                      <label class="form-label" for="form3Example1w">Employee CTC</label>
-                      <input type="text" name="ctc" id="form3Example1w" class="form-control" required="" />
-                    </div>
-                  </div>
-                </div>
-                <button type="submit" class="btn btn-success btn-lg mb-1">Submit</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
               </form>
             </div>
           </div>
@@ -130,10 +176,6 @@
       </div>
     </div>
   </section>
-
 </body>
+
 </html>
-
-
-
-

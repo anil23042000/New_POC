@@ -18,7 +18,7 @@ const { Duplex } = require("stream");
 const { projectsreso } = require("../controller/per_controller");
 const Projects = mongoose.model('Project');
 const Employee = mongoose.model('Employee');
-const ProjectDetails = mongoose.model('Project_Resource');
+const ProjectResource = mongoose.model('Project_Resource');
 const File = mongoose.model('File');
 
 
@@ -55,7 +55,7 @@ async function insertProject(req, res) {
 async function insertResource(req, res) {
 
     console.log(req.body);
-    const projectreso = new ProjectDetails();
+    const projectreso = new ProjectResource();
     const project = await Projects.findById(req.body.pname).lean();
     console.log(project)
     const employee = await Employee.findById(req.body.ename).lean();
@@ -108,7 +108,7 @@ async function listallEmployee(req, res) {
 
 //finding all Resources and displaying
 async function listallResource(req, res) {
-    const resource = await ProjectDetails.find().lean();
+    const resource = await ProjectResource.find().lean();
     res.render("uploadfile/listresource", { list: resource })
 }
 
@@ -161,7 +161,7 @@ async function updateByresId(req, res) {
     console.log("updated Reso")
     console.log(req.body)
     console.log(req.body._id)
-    ProjectDetails.findOneAndUpdate({ _id: req.body._id }, req.body, { new: true }, (err, doc) => {
+    ProjectResource.findOneAndUpdate({ _id: req.body._id }, req.body, { new: true }, (err, doc) => {
         if (!err) {
             console.log(doc)
             res.redirect('/api/listresource');
@@ -195,7 +195,7 @@ async function getOnePro(req, res) {
 
 //finding single Resource and rendering for update
 async function getOneReso(req, res) {
-    const project = await ProjectDetails.findById(req.params.id).lean();
+    const project = await ProjectResource.findById(req.params.id).lean();
     res.render("uploadfile/updatereso",
         { Project: project }
     );
@@ -230,7 +230,7 @@ async function deleteByEmpId(req, res) {
 async function deleteByresoId(req, res) {
     //here deleting 
     try {
-        const project = await ProjectDetails.findByIdAndRemove(req.params.id);
+        const project = await ProjectResource.findByIdAndRemove(req.params.id);
         if (project) res.redirect("/api/listres");
     } catch (err) {
         console.log(err);
@@ -278,7 +278,7 @@ async function readOneFile(req, res) {
 
 async function giveMoreInfo(req, res) {
     console.log(req.params.id);
-    const details = await ProjectDetails.find({ "projectID": req.params.id }).lean();
+    const details = await ProjectResource.find({ "projectID": req.params.id }).lean();
     console.log(details)
 
     res.render("uploadfile/moredetails", { list: details });
